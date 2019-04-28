@@ -19,17 +19,17 @@
                         <ul>
                             <li>
                                 <p>客显口</p>
-                                <select :disabled="disabled !== 1">
-                                    <option v-for="facts in factsLists">{{facts}}</option>
+                                <select :disabled="disabled !== 1" v-model="connectedFactPort">
+                                    <option v-for="factPort in factPortLists">{{factPort}}</option>
                                 </select>
                                 
                             </li>
                             <li>
                                 <p>对接口</p>
                                 <select  ref="connectionPortIntoSelect" :disabled="disabled !== 1">
-                                    <option v-for="virtual in virtualLists">{{virtual}}</option>
+                                    <option v-for="virtualInputPort in virtualInputPortLists">{{virtual}}</option>
                                 </select>
-                                <p> ⇌ <span class="connectionPort" v-if="connectionPortShow">{{connectionPortOut}}</span></p>
+                                <p> ⇌ <span class="connectionPort" v-if="connectionPortShow">{{acceptVirtualInputPort}}</span></p>
                             </li>
                         </ul>
                         <button @click="createPort" :disabled="disabled !==1">创建对接口</button><br/>
@@ -42,7 +42,7 @@
                         <div class="box-body">
                             <!--<div class="fullbg"></div>-->
                             <p>监听口</p>
-                            <select :disabled="disabled !== 2">
+                            <select :disabled="disabled !== 2" v-model:>
                                 <option v-for="facts in factsLists">{{facts}}</option>
                             </select>
                         </div>
@@ -53,7 +53,7 @@
                         <input type="radio" name="getAmount" v-model="getAmount" value="3"><h5>窗口获取</h5>
                         <div class="box-body">
                             <!--<div class="fullbg"></div>-->
-                            <input class="windowIpt" type="number" :disabled="disabled !== 3">
+                            <input class="windowIpt" type="number" :disabled="disabled !== 3" v-model="">
                             <button :disabled="disabled !== 3">抓取</button>
                         </div>
                     </div>
@@ -143,17 +143,25 @@ export default {
     name:'Money',
     data() {
         return {
-            getAmount:0,
-            connectionPort:'COM3',
-            factsLists:['无','com1','com2'],
-            virtualLists:['无'],
-            connectionPortShow:false,
-            printMoneyTypeLists:['网口','串口'],
-            printMoneyTypeShow:false,
-            printMoneyTypeValue:'',
-            connectionPortOut:'COM4',
-            disabled:'',
-            printMoneyIp:'',
+            amounts:{
+                getAmountWay:1,
+                factPortLists:[],
+                virtualInputPortLists:[],
+                virtualMonitor:{
+                    virtualInputPort:'',
+                    acceptVirtualInputPort:'',
+                    connectedFactPort:''
+                },
+                physicalMonitor:{
+                    connecttingFactPort:''
+                },
+                windowMonitor:{
+                    windowMonitorData:''
+                },
+                receiptMonitor:{
+
+                }
+            }
         }
     },
     components:{
@@ -206,6 +214,7 @@ export default {
     .title{
         width: 100px;
         float: left;
+        margin: 0 0 40px 0;
     }
     /*正文*/
     .content{
@@ -214,20 +223,10 @@ export default {
         float: left;
     }
     /*设置部分*/
-    .fullbg{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        background-color:rgb(160,160,160,0.4);
-        z-index: 2;
-    }
+    
 
 
-    .content-left{
-        width: 260px;
-        float: left;
-    }
+    
     .box{
         width: 100%;
         padding: 0 0 40px 40px;

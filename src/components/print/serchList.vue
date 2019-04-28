@@ -53,42 +53,42 @@ export default {
 </script>
 
 <style scoped>
-    #serchList{
+    .serchList{
         width: 100%;
         padding: 0 0 0 40px;
         box-sizing: border-box;
     }
-    h5{
+    .serchList h5{
         text-align: center;
     }
 
-    .box{
+    .serchList_box{
         overflow: scroll;
         width: 100%;
         height: 200px;
         border: 1px solid rgb(176, 176, 176);
         background-color: white;
     }
-    .box ul li{
+    .serchList_box ul li{
         list-style: none;
         text-align: center;
         margin: 0 0 3px 0;
         border-bottom: 1px solid rgb(240, 240, 240);   
     }
-    .box ul li button{
+    .serchList_box ul li button{
         width: 40px;
         border-radius: 5px;
         color: rgb(0, 59, 107);
     }
-    .box ul li p{
+    .serchList_box ul li p{
         display: inline;
         font-size: 13px;    
     }
-    .footer{
+    .serchList_footer{
         width: 100%;
         margin: 10px 0 40px 0;
     }
-    .footer button{
+    .serchList_footer button{
         width: 100px;
         height: 30px;
         display: block;

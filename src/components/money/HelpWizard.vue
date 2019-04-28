@@ -15,6 +15,7 @@
             <div class="box-help" v-if="portShow==1">b</div>
             <div class="box-help" v-if="portShow==2">c</div>
             <div class="box-help" v-if="portShow==3">d</div>
+            <div class="box-help" v-if="portShow==4">e</div>
         </div>
     </div>
 </template>
@@ -23,7 +24,7 @@ export default {
     name:'HelpWizard',
     data() {
         return {
-            items:['虚拟串口','物理监听','窗口获取','小票获取'],
+            items:['虚拟串口','物理监听','窗口获取','小票获取','直接显示'],
             portShow:'',
         }
     },
@@ -55,11 +56,11 @@ export default {
     .header ul li{
         list-style: none;
         float: left;
-        width: 25%;
+        width: 20%;
         text-align: center;
     }
     .header ul li button{
-        width: 70px;
+        width: 56px;
         height: 20px;
     }
 

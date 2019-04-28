@@ -12,11 +12,11 @@
                 <div class="box-right">
                     <ul>
                         <li>
-                            <input type="checkbox" v-model="choosedC" value="supportWeChat" id="supportWeChat">
+                            <input type="checkbox" v-model="configs.payMethods" value="1">
                             <p>是否支持微信</p>
                         </li>
                         <li>
-                            <input type="checkbox" v-model="choosedC" value="supportAliPay" id="supportAliPay">
+                            <input type="checkbox" v-model="configs.payMethods" value="2">
                             <p>是否支持支付宝</p>
                         </li>
                     </ul>
@@ -30,7 +30,7 @@
                 <div class="box-right">
                     <ul>
                         <li>
-                            <input type="checkbox" v-model="choosedC" value="supportYardBox" id="supportYardBox">
+                            <input type="checkbox" v-model="configs.supportScanBox" value="1" >
                             <p>是否支持扫码枪或新大陆盒子</p>
                         </li>
                     </ul>
@@ -44,30 +44,33 @@
                 <div class="box-right">
                     <ul> 
                         <li>
-                            <input type="checkbox" v-model="choosedC" value="automaticStartup" id="automaticStartup">
+                            <input type="checkbox" v-model="configs.automaticStartup" value="1">
                             <p>开机自动启动</p>
                         </li>
                         <li>
-                            <input type="checkbox" v-model="choosedC" value="confirmReceipt" id="confirmReceipt">
+                            <input type="checkbox" v-model="configs.confirmCollectMoney" value="0">
                             <p>手动确认收款</p>
                         </li>
+                        
                         <li>
-                            <input type="checkbox" v-model="choosedC" value="barControl" id="barControl">
-                            <p>收款语音播报</p>
-                        </li>
-                        <li>
-                            <input type="radio" v-model="popupLH" value="click" name="popupLH">
+                            <input type="radio" v-model="configs.popupLh" value="1">
                             <p>单击悬浮窗打开乐惠助手</p>
                         </li>
                         <li>
-                            <input type="radio" v-model="popupLH" value="doubleClick" name="popupLH">
+                            <input type="radio" v-model="configs.popupLh" value="2">
                             <p>双击悬浮窗打开乐惠助手</p>
                         </li>
                         <br/>
                         <li>
+                            <label>语音音量</label>
+                            <select v-model="configs.voiceVolume">
+                                <option v-for="(voiceVolume,voiceVolumeIndex) in voiceVolumeLists" :value="voiceVolume">{{voiceVolume}}</option>
+                            </select>
+                        </li>
+                        <li>
                             <label>弹窗快捷键</label>
-                            <select id="alertLH">
-                                <option v-for="(shortcut,shortcutIndex) in shortcutLists" value="shortcutIndex">{{shortcut}}</option>
+                            <select v-model="configs.openLh">
+                                <option v-for="(shortcut,shortcutIndex) in shortcutLists" :value="shortcut">{{shortcut}}</option>
                             </select>
                         </li>
                         <!--
@@ -94,8 +97,8 @@
                     <ul>
                         <li>
                             <label>扫码识别间隔</label>
-                            <select id="scanInterval" v-model="scanIntervalSelected">
-                                <option v-for="(scanInterval,scanIntervalIndex) in scanIntervalLists" v-bind:value="scanIntervalIndex">{{scanInterval}}</option>
+                            <select v-model="configs.scanIntervalSelected">
+                                <option v-for="(scanInterval,scanIntervalIndex) in scanIntervalLists" :value="scanInterval">{{scanInterval}}</option>
                             </select>
                         </li>
                     </ul>
@@ -105,7 +108,7 @@
         
         <div class="footer">
             <button>取消</button>
-            <button class="save">保存</button>
+            <button class="save" @click='saveConfig'>保存</button>
         </div>
     </div>
 </template>
@@ -117,13 +120,36 @@ export default {
     data() {
         return {
             shortcutLists:['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11','F12'],
-            scanIntervalLists:'',
-            choosedC:['supportWeChat'],
-            popupLH:'doubleClick',
-            scanIntervalLists:[],
-            scanIntervalSelected:1,
+            scanIntervalLists:[80,120,150,200,300],
+            voiceVolumeLists:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+            configs:{
+                payMethods:[],
+                supportScanBox:[],
+                automaticStartup:[],
+                confirmCollectMoney:[],
+                popupLh:[],
+                voiceVolume:1,
+                openLh:'F1',
+                scanIntervalSelected:80
+            }
         }
     },
+    methods:{
+        saveConfig:function(){
+            var url = '/submitConfig'
+            var data = {
+                id : 1,
+                moduleName : '',
+                configs : this.configs
+            }
+            axios.post(url, data).then((response)=>{
+                console.log(response)
+            }).
+            catch(function(error){
+                console.log('请求失败')
+            })
+        }
+    }
 }
 </script>
 
@@ -137,6 +163,7 @@ export default {
     .title{
         width: 100px;
         float: left;
+        margin: 0 0 40px 0;
     }
     
     /**/

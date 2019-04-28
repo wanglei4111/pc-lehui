@@ -63,20 +63,20 @@ export default {
 </script>
 
 <style scoped>
-    #printList{
+    .printList{
         width: 100%;
         box-sizing: border-box;
     }
-    h5{
+    .printList h5{
         text-align: center;
     }
-    h2{
+    .printList h2{
         position: relative;
         text-align: center;
         color: rgb(200,200,200);
         top: 20px;
     }
-    .choosedPrint{
+    .printList_choosedPrint{
         overflow: hidden;
         width: 100%;
         height: 30px;
@@ -86,7 +86,7 @@ export default {
         margin: 0 0 20px 0;
         
     }
-    .choosedPrint ul li{
+    .printList_choosedPrint ul li{
         list-style: none;
         float: left;
         line-height: 30px;
@@ -95,17 +95,17 @@ export default {
         text-align: center;
             
     }
-    .choosedPrint ul li:first-child{
+    .printList_choosedPrint ul li:first-child{
         padding-right:3px; 
     }
-    .choosedPrint ul li:nth-child(2){
+    .printList_choosedPrint ul li:nth-child(2){
         width: 30px;
     }
-    .control{
+    .printList_choosedPrint_control{
         height: 100%;
         float: right;
     }
-    .control button{
+    .printList_choosedPrint_control button{
         position: relative;
         top: 2px;
         width: 40px;

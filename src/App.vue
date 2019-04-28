@@ -1,19 +1,17 @@
 <template>
   <div id="app">
-      <router-view name="pcHeader"></router-view>
-      <router-view name="pcC"></router-view>
-      <router-view name="pcScan"></router-view> 
-      <router-view name="pcMoney"></router-view>   
-      <router-view name="pcPrint"></router-view>   
-      <router-view name="pcUpdate"></router-view>   
-      <router-view/> 
+      <all-configs></all-configs>
   </div>
   
 </template>
 
 <script>
+import configs from '@/components/configs'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    'all-configs':configs
+  }
 }
 </script>
 
@@ -28,8 +26,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(250, 250, 250);
   color: #2c3e50;
-  min-width: 760px;
-  max-width: 954px;
+  min-width: 664px;
+  max-width: 855px;
   margin:0 auto;
   padding: 35px;
   box-sizing: border-box;
